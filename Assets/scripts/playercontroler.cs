@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
 
 public class playercontroler : MonoBehaviour
 {
+    public Text scoreText;
+    public Text winText; 
     Rigidbody2D rbd2;
     private int count = 0;
 
@@ -28,10 +32,15 @@ public class playercontroler : MonoBehaviour
         {
             if (collision.CompareTag("PickUp"))
         {
-            count = count + 1;
+            count++;
             Destroy(collision.gameObject);
+            UpdateScoreText();
         }
         }
-
+    void UpdateScoreText()
+    {
+        scoreText.text = "Wynik: " + count;
     }
 
+
+}
