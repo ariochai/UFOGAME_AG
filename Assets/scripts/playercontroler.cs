@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class playercontroler : MonoBehaviour
 {
@@ -40,7 +41,17 @@ public class playercontroler : MonoBehaviour
     void UpdateScoreText()
     {
         scoreText.text = "Wynik: " + count;
+        if (count == 3)
+        {
+            winText.gameObject.SetActive(true);
+            scoreText.gameObject.SetActive(false);
+            StartCoroutine(WaitForFunction());
+            SceneManager.LoadScene("Level02");
+        }
     }
-
+    IEnumerator WaitForFunction()
+    {
+        yield return new WaitForSeconds(3);
+    }
 
 }
