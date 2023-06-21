@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class playercontroler : MonoBehaviour
 {
     Rigidbody2D rbd2;
-    // Start is called before the first frame update
+    private int count = 0;
+
     void Start()
     {
         rbd2 = GetComponent<Rigidbody2D>();
@@ -18,7 +20,18 @@ public class playercontroler : MonoBehaviour
         float MoveHorizontal = Input.GetAxis("Horizontal");
         float MoveVertical = Input.GetAxis("Vertical");
         Vector2 Movement = new Vector2(MoveHorizontal, MoveVertical);
-        rbd2.AddForce(Movement*15);
+        rbd2.AddForce(Movement * 5);
 
     }
-}
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.CompareTag("PickUp"))
+        {
+            count = count + 1;
+            Destroy(collision.gameObject);
+        }
+        }
+
+    }
+
